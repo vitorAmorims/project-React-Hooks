@@ -7,6 +7,7 @@ const UseState = (props) => {
     // const number = useState(0)[0]
     // const setNumber = useState(0)[1]
     const [count, setcount] = useState(0)
+    const [name, setName] = useState('')
     return (
         <div className="UseState">
             <PageTitle
@@ -23,6 +24,8 @@ const UseState = (props) => {
                         <button onClick={() => setcount(current => current - 10)} className="btn">-10</button>
                     </div>
                 </div>
+            <SectionTitle title="Exercício #02" />
+            <input type="text" className="input" value={name} onChange={(e) => setName(e.target.value)}/>
         </div>
     )
 }
