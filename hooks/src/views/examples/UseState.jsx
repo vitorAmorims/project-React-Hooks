@@ -9,25 +9,50 @@ const UseState = (props) => {
     const [count, setcount] = useState(0)
     const [name, setName] = useState('')
     return (
-        <div className="UseState">
-            <PageTitle
-                title="Hook UseState"
-                subtitle="Estado em componentes funcionais!"
-            />
-            <SectionTitle title="Exercício #01" />
-                <div className="center">
-                    <span className="text">{count}</span>
-                    <div>
-                        <button onClick={() => setcount(count + 1)} className="btn">+</button>
-                        <button onClick={() => setcount(count - 1)} className="btn">-</button>
-                        <button onClick={() => setcount(count + 10)} className="btn">+10</button>
-                        <button onClick={() => setcount(current => current - 10)} className="btn">-10</button>
-                    </div>
-                </div>
-            <SectionTitle title="Exercício #02" />
-            <input type="text" className="input" value={name} onChange={(e) => setName(e.target.value)}/>
+      <div className="UseState">
+        <PageTitle
+          title="Hook UseState"
+          subtitle="Estado em componentes funcionais!"
+        />
+        <SectionTitle title="Exercício #01" />
+        <div className="center">
+          <span className="text">{count}</span>
+          <div>
+            <button onClick={() => setcount(count + 1)} className="btn">
+              +
+            </button>
+            <button onClick={() => setcount(count - 1)} className="btn">
+              -
+            </button>
+            <button onClick={() => setcount(count + 10)} className="btn">
+              +10
+            </button>
+            <button
+              onClick={() => setcount((current) => current - 10)}
+              className="btn"
+            >
+              -10
+            </button>
+            <div>
+              <label>Insira o valor desejável: </label>
+              <input
+                type="number"
+                onChange={(e) => {
+                  setcount((current) => (current = e.target.value));
+                }}
+              />
+            </div>
+          </div>
         </div>
-    )
+        <SectionTitle title="Exercício #02" />
+        <input
+          type="text"
+          className="input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+    );
 }
 
 export default UseState

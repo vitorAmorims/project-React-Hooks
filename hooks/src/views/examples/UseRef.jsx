@@ -31,6 +31,7 @@ const UseRef = (props) => {
           className="input"
         />
       </div>
+      <SectionTitle title="Exercício #02" />
     </div>
   );
 };
