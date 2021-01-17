@@ -21,7 +21,7 @@ const UseEffect = (props) => {
   const [fatorial, setFatorial] = useState(1);
   const [status, setStatus] = useState('impar');
 
-  //   setFatorial(calcFatorial(number)); error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
+  // ex01
   useEffect(() => {
     setFatorial(calcFatorial(number));
   }, [number]);
@@ -38,6 +38,8 @@ const UseEffect = (props) => {
   //     }
   //     return fatorial;
   //   }
+
+  // ex02
   useEffect(() => {
     setStatus(parOuImpar(number));
   },[number]);
@@ -74,7 +76,7 @@ const UseEffect = (props) => {
       <div className="center">
         <div>
           <span className="text">Status input - </span>
-          <span className="text red">{status}</span>
+          <span className="text">{status}</span>
         </div>
       </div>
     </div>
