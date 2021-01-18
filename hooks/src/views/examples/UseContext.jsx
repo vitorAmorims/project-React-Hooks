@@ -1,11 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import PageTitle from '../../components/layout/PageTitle'
 import DataContext from '../../data/DataContext';
+import SectionTitle from "../../components/layout/SectionTitle";
+import { AppContext } from '../../data/Store';
+
 
 const UseContext = (props) => {
     const context = useContext(DataContext);
     const { state, setState } = context;
-
+    const {number, text, setNumber, setText} = useContext(AppContext)
+    
     function addNumber(delta) {
       setState({
         ...state, //spread
@@ -13,12 +17,19 @@ const UseContext = (props) => {
       });
     }
 
+    useEffect(() => {
+      if (number > 1250) {
+        setText('Eita..')
+      }
+    }, [number])
+
     return (
       <div className="UseContext">
         <PageTitle
           title="Hook UseContext"
           subtitle="Aceita um objeto de contexto e retorna o valor atual do contexto!"
         />
+        <SectionTitle title="Exercício #01" />
         <div className="center">
           <span className="text">{state.number}</span>
           <span className="text">{state.text}</span>
@@ -31,13 +42,26 @@ const UseContext = (props) => {
             </button>
           </div>
         </div>
+        <SectionTitle title="Exercício #02" />
+        <div className="center">
+          <span className="text">{number}</span>
+          <span className="text">{text}</span>
+          <div>
+            <button className="btn" onClick={() => setNumber(number -1)}>
+              -1
+            </button>
+            <button className="btn" onClick={() => setNumber(number +1)}>
+              +1
+            </button>
+          </div>
+        </div>
       </div>
     );
 }
 
-export default UseContext
+export default UseContext;
 
-
+//aula 1
 //cofiguração de Hook useContext
 
 //criar os dados fora dos componentes, e depois passar os dados à partir de um provider
@@ -143,3 +167,97 @@ export default UseContext
 // 		<div>
 // 			<button onClick-{() => addNumber(-1)}>-1</button>
 // 			<button onClick-{() => addNumber(1)}>-1</button>
+
+//-----------------------aula 2
+
+// aula 02 - useContext - passo mais organizado (encapsulado)
+
+// // ---------------------------1- primeira etapa /src/data/Store.jsx
+
+// componente que tem estado interno que vai controlar o estado de nossa aplicação
+
+
+// import React, { useState } from 'react';
+
+// const initialState = {
+// 	number: 1234,
+// 	text: "Context API + Hooks"
+// };
+
+// export const AppContext = React.createContext(initialState);
+
+// const Store = props => {
+// 	const [state, setState] = useState(initialState);
+	
+// 	function updateState(key, value) {
+// 		setState({
+// 			...state, 
+// 			[key]: value,
+// 			});
+// 	}
+	
+// 	return(
+// 		<AppContext.Provider value={{
+// 			number: state.number,
+// 			text: state.text,
+// 			setNumber: n => updateState('number', n),
+// 			setText: t => updateState('text', t),
+// 		}}
+// 		>
+// 		   {props.children}
+// 		</AppContext.Provider />
+// 	)
+// }
+
+// export default Store
+
+
+// // ----------------------------2 - segunda etapa /src/App.jsx
+
+// 1 - import Store from '../data/Store';
+
+// 2 - encapsular o Store
+
+// 3 - voltar /src/data/Store.jsx e inserir {props.children}
+
+//  render(
+// 	<Store> //este componente será responspavel por criar o Provider
+// 		<DataContext.Provider value={{state, setState}}>
+// 		....
+// 		</DataContext.Provider>
+// 	</Store>
+// 	)
+//  }
+		
+// // ------------------------------- 3 -terceira etapa dentro do component UseContext.jsx
+// // 1- inserir componente <SectionTitle title="Exercício #01" >
+// // 2- inserir componente <SectionTitle title="Exercício #02" >
+// // 3 verificar se importou o arquivo '../../data/Store //acessar o outro estado
+	
+	
+// 	//antes de return ....
+// 	const {number, text SetNumber, setText} = useContext(AppContext)
+	
+// 	useEffect(() => {
+// 		if (number > 1250) {
+// 			setText('Eita..')
+// 		}
+// 	}, [number])
+	
+// <SectionTile title="Exercício 02" />
+// 	<div classname="center">
+// 		<span className="text">{text}</span	
+// 		<span className="text">{number}</span>
+// 		<div>
+// 			<button 
+// 				className="btn" 
+// 				onClick={() => setNumber('number', -1)}>
+// 				-1
+// 			</button>
+// 			<button 
+// 				className="btn" 
+// 				onClick={() => setNumber('number', +1)}>
+// 				+1
+// 			</button>
+// 		</div>
+		
