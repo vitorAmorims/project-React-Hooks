@@ -7,6 +7,14 @@ const sum = (a, b) => {
     return a + b;
 }
 
+const renderizar = () => {
+  const future = Date.now() + 5000; //consigo simular lag de processamento
+  while(Date.now() < future) {
+    // return false;
+  }
+  return true;
+}
+
 const UseMemo = (props) => {
     const [number1, setNumber1] = useState(0);
     const [number2, setNumber2] = useState(0);
@@ -49,6 +57,7 @@ const UseMemo = (props) => {
           type="number"
           className="input"
         />
+        <button disabled={renderizar()}>Renderizar</button>
         </div>
       </div>
     );

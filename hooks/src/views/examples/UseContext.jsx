@@ -8,6 +8,7 @@ import { AppContext } from '../../data/Store';
 const UseContext = (props) => {
     const context = useContext(DataContext);
     const { state, setState } = context;
+    // console.log(state);
     const {number, text, setNumber, setText} = useContext(AppContext)
     
     function addNumber(delta) {
