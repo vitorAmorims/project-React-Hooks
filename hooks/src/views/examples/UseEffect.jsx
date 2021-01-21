@@ -16,6 +16,13 @@ function parOuImpar(n) {
   }
 }
 
+const renderizar = () => {
+  const future = Date.now() + 5000; //consigo simular lag de processamento
+  while(Date.now() < future) {}
+  return false;
+}
+
+
 const UseEffect = (props) => {
   const [number, setNumber] = useState(1);
   const [fatorial, setFatorial] = useState(1);
@@ -43,12 +50,19 @@ const UseEffect = (props) => {
   useEffect(() => {
     setStatus(parOuImpar(number));
   },[number]);
+
+  // useEffect(() => {
+  //   renderizar()
+  // })
+
+
   return (
     <div className="UseEffect">
       <PageTitle
         title="Hook UseEffect"
         subtitle="Permite executar efeitos colaterais em componentes funcionais!"
       />
+      {/* <button disabled={renderizar()}>Renderizar async</button> */}
       <SectionTitle title="Exercício #01" />
       <div className="center">
         <div>

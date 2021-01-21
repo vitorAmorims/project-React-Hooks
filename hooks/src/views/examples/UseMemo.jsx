@@ -1,18 +1,10 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo,useEffect } from "react";
 import PageTitle from '../../components/layout/PageTitle'
 
 const sum = (a, b) => {
     const future = Date.now() + 2000; //consigo simular lag de processamento
     while(Date.now() < future) {} //lógica enquanto data atual < data futura não realiza soma
     return a + b;
-}
-
-const renderizar = () => {
-  const future = Date.now() + 5000; //consigo simular lag de processamento
-  while(Date.now() < future) {
-    // return false;
-  }
-  return true;
 }
 
 const UseMemo = (props) => {
@@ -35,6 +27,7 @@ const UseMemo = (props) => {
           title="Hook UseMemo"
           subtitle="Retorna um valor memoizado!"
         />
+        
         <div className="center">
             <span className="text">{result}</span>
             <p>implementada lógica assincrona para os dois primeiros inputs</p>
@@ -57,7 +50,6 @@ const UseMemo = (props) => {
           type="number"
           className="input"
         />
-        <button disabled={renderizar()}>Renderizar</button>
         </div>
       </div>
     );
