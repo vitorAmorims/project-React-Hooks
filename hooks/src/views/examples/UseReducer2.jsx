@@ -1,14 +1,29 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useEffect} from 'react';
 
 import initialState from '../../Store'; //estado inicial 
 import reducer from '../../Store/Reducers/index'; //fn reducer
-import { numberAdd2, multiplicar, dividir, arredondar, n, login } from '../../Store/Actions/index';
+import { numberAdd2, multiplicar, dividir, arredondar, n, login, addPlanets } from '../../Store/Actions/index';
 
 const UseReducer2 = () => {
     const [state, dispath] = useReducer(reducer, initialState) //dentro do state temos o estadoGlobal
     // console.log(state);
     // console.log(dispath);
     // console.log(login)
+    // console.log(addPlanets)
+    console.log(state);
+    const {data} = state;
+
+    function showNamePlanets(value) {
+      if (value)
+      return value.map((planet) => {
+        return <ul><li key={planet.name}>{planet.name}</li></ul>
+      })
+    }
+
+    useEffect(() => {
+      showNamePlanets(data)
+    }, [data]);
+
     return (
       <div>
         <label>{state.user.name}</label>
@@ -30,7 +45,12 @@ const UseReducer2 = () => {
           setar Vitor
         </button></label>
         <input type="text" placeholder="Insira um texto qualquer!" onChange={(event) => login(dispath, event.target.value)}/>
-        
+        <button type="button" onClick={() => addPlanets(dispath)}>
+          fetchPlanets
+        </button>
+        <div>
+          {showNamePlanets(data)}
+        </div>
 
       </div>
     );
