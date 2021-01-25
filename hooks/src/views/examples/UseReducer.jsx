@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import PageTitle from '../../components/layout/PageTitle'
 
 const initialState = {
-	user: null,
+  user: null,
 	cart: [],
   products: [],
   estados: [],
